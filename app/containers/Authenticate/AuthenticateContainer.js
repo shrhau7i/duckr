@@ -4,7 +4,7 @@ import auth from 'helpers/auth'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as userActionCreators from 'redux/modules/users'
-console.log(userActionCreators);
+// console.log(userActionCreators);
 
 const AuthenticateContainer = React.createClass({
   propTypes: {
@@ -27,7 +27,7 @@ const AuthenticateContainer = React.createClass({
   },
 
   render () {
-    console.log('Is Fetching', this.props.isFetching);
+    // console.log('Is Fetching', this.props.isFetching);
     return (
       <Authenticate
         onAuth={this.handleAuth}
@@ -38,7 +38,7 @@ const AuthenticateContainer = React.createClass({
 })
 
 function mapStateToProps (state) {
-  console.log('STATE', state)
+  // console.log('STATE', state)
   return {
     isFetching: state.isFetching,
     error: state.error
