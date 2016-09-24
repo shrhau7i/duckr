@@ -27,6 +27,7 @@ const AuthenticateContainer = React.createClass({
   },
 })
 
+<<<<<<< b657835bb38466b99fbef343db0d34681450c85d
 function mapStateToProps (state) {
   // console.log('STATE', state)
   return {
@@ -40,3 +41,9 @@ function mapDispatchToProps (dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthenticateContainer)
+=======
+export default connect(
+  (state) => ({isFetching: state.isFetching, error: state.error}),
+  (dispatch) => bindActionCreators(userActionCreators, dispatch)
+)(AuthenticateContainer)
+>>>>>>> updated AuthenticateContainer
