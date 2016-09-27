@@ -11,11 +11,14 @@ const AuthenticateContainer = React.createClass({
     error: PropTypes.string.isRequired,
     fetchAndHandleAuthedUser: PropTypes.func.isRequired,
   },
-
-  handleAuth () {
-    this.props.fetchAndHandleAuthedUser()
+  contextTypes: {
+    router: PropTypes.object.isRequired,
   },
-
+  handleAuth (e) {
+    e.preventDefault()
+    this.props.fetchAndHandleAuthedUser()
+      .then(() => this.context.router.replace('feed'))
+  },
   render () {
     // console.log('Is Fetching', this.props.isFetching);
     return (
@@ -27,23 +30,8 @@ const AuthenticateContainer = React.createClass({
   },
 })
 
-<<<<<<< b657835bb38466b99fbef343db0d34681450c85d
-function mapStateToProps (state) {
-  // console.log('STATE', state)
-  return {
-    isFetching: state.isFetching,
-    error: state.error
-  }
-}
 
-function mapDispatchToProps (dispatch) {
-  return bindActionCreators(userActionCreators, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AuthenticateContainer)
-=======
 export default connect(
   (state) => ({isFetching: state.isFetching, error: state.error}),
   (dispatch) => bindActionCreators(userActionCreators, dispatch)
 )(AuthenticateContainer)
->>>>>>> updated AuthenticateContainer
