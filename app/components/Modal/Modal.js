@@ -17,6 +17,7 @@ const modalStyles = {
 }
 
 const { object, string, func, bool } = PropTypes
+
 Modal.PropTypes = {
   duckText: string.isRequired,
   isOpen: bool.isRequired,
