@@ -1,7 +1,6 @@
 import auth, { logout, saveUser } from 'helpers/auth'
 import { formatUserInfo } from 'helpers/utils'
 
-
 const AUTH_USER = 'AUTH_USER'
 const UNAUTH_USER = 'UNAUTH_USER'
 const FETCHING_USER = 'FETCHING_USER'
@@ -68,7 +67,7 @@ export function logoutAndUnauth () {
 
 export function removeFetchingUser () {
   return {
-    type: REMOVE_FETCHING_USER,
+    type: REMOVE_FETCHING_USER
   }
 }
 
@@ -126,6 +125,11 @@ export default function users (state = initialState, action) {
         isFetching: false,
         error: action.error,
       }
+    case REMOVE_FETCHING_USER :
+      return {
+        ...state,
+        isFetching: false,
+      }
     case FETCHING_USER_SUCCESS:
       return action.user === null
         ? {
@@ -139,11 +143,6 @@ export default function users (state = initialState, action) {
           error: '',
           [action.uid]: user(state[action.uid], action),
         }
-    case REMOVE_FETCHING_USER :
-      return {
-        ...state,
-        isFetching: false,
-      }
     default :
       return state
   }

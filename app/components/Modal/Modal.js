@@ -5,7 +5,6 @@ import {
   newDuckInput, submitDuckBtn, darkBtn } from './styles.css'
 import { formatDuck } from 'helpers/utils'
 
-
 const modalStyles = {
   content: {
     width: 350,
@@ -18,21 +17,20 @@ const modalStyles = {
 }
 
 const { object, string, func, bool } = PropTypes
-
-Modal.PropTypes = {
+Modal.propTypes = {
   duckText: string.isRequired,
+  closeModal: func.isRequired,
   isOpen: bool.isRequired,
-  user: object.isRequired,
   isSubmitDisabled: bool.isRequired,
   openModal: func.isRequired,
-  closeModal: func.isRequired,
+  duckFanout: func.isRequired,
   updateDuckText: func.isRequired,
-  duckFanout: func.isRequired
+  user: object.isRequired,
 }
 
 export default function Modal (props) {
   function submitDuck () {
-    props.duckFanout(formatDuck(props.duckText, props.user))
+    return props.duckFanout(formatDuck(props.duckText, props.user))
   }
 
   return (
