@@ -81,7 +81,7 @@ export function setUsersLikes () {
     const uid = getState().users.authedId
     dispatch(fetchingLikes())
     fetchUsersLikes(uid)
-      .then((likes) => dispatch(fetchingLikesSuccess(liks)))
+      .then((likes) => dispatch(fetchingLikesSuccess(likes)))
       .catch((error) => dispatch(fetchLikesError(error)))
   }
 }
