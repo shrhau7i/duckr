@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react'
 import { formatTimestamp } from 'helpers/utils'
 import Reply from 'react-icons/lib/fa/mail-reply'
 import Star from 'react-icons/lib/fa/star'
-
 import {
   duckContainer, contentContainer, avatar, actionContainer,
   header, text, likeReplyContainer, icon, likedIcon, author,
@@ -35,21 +34,21 @@ export default function Duck (props) {
       className={duckContainer}
       style={{cursor: props.hideReplyBtn === true ? 'default' : 'pointer'}}
       onClick={props.onClick}>
-        <img src={props.duck.avatar} className={avatar} />
+        <img src={props.duck.avatar} className={avatar}/>
         <div className={contentContainer}>
           <div className={header}>
             <div onClick={props.goToProfile} className={author}>{props.duck.name}</div>
             <div>{formatTimestamp(props.duck.timestamp)}</div>
           </div>
-        </div>
-        <div className={text}>{props.duck.text}</div>
-        <div className={likeReplyContainer}>
-          {props.hideReplyBtn === true
-            ? null
-            : <Reply className={icon} />}
-          <div className={actionContainer}>
-            <Star className={starIcon} onClick={(e) => starFn(props.duck.duckId, e)} />
-            {props.hideLikeCount === true ? null : <div>{props.numberOfLikes}</div>}
+          <div className={text}>{props.duck.text}</div>
+          <div className={likeReplyContainer}>
+            {props.hideReplyBtn === true
+              ? null
+              : <Reply className={icon} />}
+            <div className={actionContainer}>
+              <Star className={starIcon} onClick={(e) => starFn(props.duck.duckId, e)} />
+              {props.hideLikeCount === true ? null : <div>{props.numberOfLikes}</div>}
+            </div>
           </div>
         </div>
     </div>
