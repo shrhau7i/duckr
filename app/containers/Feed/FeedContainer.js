@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Feed } from 'components'
+import { bindActionCreators } from 'redux'
 import * as feedActionCreators from 'redux/modules/feed'
 
 const FeedContainer = React.createClass({
@@ -11,7 +11,7 @@ const FeedContainer = React.createClass({
     error: PropTypes.string.isRequired,
     isFetching: PropTypes.bool.isRequired,
     setAndHandleFeedListener: PropTypes.func.isRequired,
-    resetNewDucksAvailable: PropTypes.func.isRequired
+    resetNewDucksAvailable: PropTypes.func.isRequired,
   },
   componentDidMount () {
     this.props.setAndHandleFeedListener()
@@ -19,30 +19,26 @@ const FeedContainer = React.createClass({
   render () {
     return (
       <Feed
+        duckIds={this.props.duckIds}
         newDucksAvailable={this.props.newDucksAvailable}
         error={this.props.error}
         isFetching={this.props.isFetching}
-        resetNewDucksAvailable={this.props.resetNewDucksAvailable}
-        duckIds={this.props.duckIds} />
+        resetNewDucksAvailable={this.props.resetNewDucksAvailable} />
     )
-  }
+  },
 })
 
-function mapStateToProps({feed}) {
+function mapStateToProps ({feed}) {
   const { newDucksAvailable, error, isFetching, duckIds } = feed
   return {
     newDucksAvailable,
     error,
     isFetching,
-    duckIds
+    duckIds,
   }
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(feedActionCreators, dispatch)
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  (dispatch) => bindActionCreators(feedActionCreators, dispatch)
 )(FeedContainer)

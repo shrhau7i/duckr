@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
-import { container, navContainer, link } from './styles.css'
 import { ModalContainer } from 'containers'
+import { container, navContainer, link } from './styles.css'
 
 Navigation.propTypes = ActionLinks.propTypes = NavLinks.propTypes = {
   isAuthed: PropTypes.bool.isRequired,
@@ -12,7 +12,7 @@ function NavLinks ({isAuthed}) {
     ? <ul>
         <li><Link to='/' className={link}>{'Home'}</Link></li>
       </ul>
-    : <noscript />
+    : null
 }
 
 function ActionLinks ({isAuthed}) {

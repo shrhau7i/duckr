@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react'
+import { DuckContainer } from 'containers'
 import {
   mainContainer, container, content, repliesContainer,
   replyTextAreaContainer, replyTextArea } from './styles.css'
 import { subHeader, darkBtn, errorMsg } from 'sharedStyles/styles.css'
-import { DuckContainer } from 'containers'
+import { RepliesContainer } from 'containers'
+import { formatReply } from 'helpers/utils'
 
 DuckDetails.propTypes = {
   authedUser: PropTypes.object.isRequired,
