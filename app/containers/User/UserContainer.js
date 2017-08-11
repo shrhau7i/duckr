@@ -1,6 +1,11 @@
 import React, { PropTypes } from 'react'
 import { User } from 'components'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as usersActionCreators from 'redux/modules/users'
+import * as usersDucksActionCreators from 'redux/modules/usersDucks'
+import { staleUser, staleDucks } from 'helpers/utils'
+
 const UserContainer = React.createClass({
   propTypes: {
     noUser: PropTypes.bool.isRequired,
@@ -8,6 +13,20 @@ const UserContainer = React.createClass({
     isFetching: PropTypes.bool.isRequired,
     error: PropTypes.string.isRequired,
     duckIds: PropTypes.array.isRequired,
+    fetchAndHandleUsersDucks: PropTypes.func.isRequired,
+    fetchAndHandleUser: PropTypes.func.isRequired,
+    lastUpdatedUser: PropTypes.number.isRequired,
+    lastUpdatedDucks: PropTypes.number.isRequired,
+  },
+  componentDidMount () {
+    const uid = this.props.routeParems.uid
+    if (this.props.noUser === true || staleUser(this.props.lastUpdatedUser)) {
+      this.props.fetchAndHandleUser(uid)
+    }
+
+    if (this.props.noUser === true || staleDucks(this.props.lastUpdatedDucks)) {
+      this.props.fetchAndHandleUsersDucks(uid)
+    }
   },
   render () {
     return (
@@ -27,12 +46,23 @@ function mapStateToProps ({users}, props) {
   const noUser = typeof user === 'undefined'
   return {
     noUser,
+    name: noUser ? '' : user.info.name,
     isFetching: users.isFetching || usersDucks.isFetching,
     error: users.error || usersDucks.error,
-    duckIds: specificUsersDucks ? specificUsersDucks.ducksIds : []
+    duckIds: specificUsersDucks ? specificUsersDucks.duckIds : [],
+    lastUpdatedUser: user ? user.lastUpdated : 0,
+    lastUpdatedDucks: specificUsersDucks ? specificUsersDucks.lastUpdated : 0,
   }
 }
 
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({
+    ...usersActionCreators,
+    ...usersDucksActionCreators
+  }, dispatch)
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(UserContainer)
