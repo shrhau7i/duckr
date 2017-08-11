@@ -13,7 +13,7 @@ User.propTypes = {
 
 export default function User (props) {
   return props.noUser === true
-    ? <p className={headr}>{'This user does not exist'}</p>
+    ? <p className={header}>{'This user does not exist'}</p>
     : <div>
         {props.isFetching === true
           ? <p className={'header'}>{'Loading'}</p>

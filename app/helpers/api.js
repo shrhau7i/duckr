@@ -67,7 +67,7 @@ export function fetchUser (uid) {
 }
 
 export function fetchUsersDucks (uid) {
-  return fef.child(`usersDucks/${uid}`).once('value')
+  return ref.child(`usersDucks/${uid}`).once('value')
     .then((snapshot) => snapshot.val() || {})
 }
 

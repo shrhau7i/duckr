@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import {
-  mainContainer, containers, content, repliesContainer,
+  mainContainer, container, content, repliesContainer,
   replyTextAreaContainer, replyTextArea } from './styles.css'
 import { subHeader, darkBtn, errorMsg } from 'sharedStyles/styles.css'
 import { DuckContainer } from 'containers'

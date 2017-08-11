@@ -48,7 +48,7 @@ export function fetchAndHandleUsersDucks (uid) {
       .then(({ducks}) => dispatch(
         fetchingUsersDucksSuccess(
           uid,
-          Object.key(ducks).sort((a, b) => ducks[b].timestamp - ducks[a].timestamp).
+          Object.keys(ducks).sort((a, b) => ducks[b].timestamp - ducks[a].timestamp),
           Date.now()
         )
       ))

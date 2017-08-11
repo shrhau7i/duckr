@@ -50,15 +50,6 @@ export function addMultipleDucks (ducks) {
   }
 }
 
-export function fetchAndHandleDuck (duckId) {
-  return function (dispatch) {
-    dispatch(fetchingDuck())
-    fetchDuck(duckId)
-      .then((duck) => dispatch(fetchingDuckSuccess(duck)))
-      .catch((error) => dispatch(fetchingDuckError(error)))
-  }
-}
-
 export function duckFanout (duck) {
   return function (dispatch, getState) {
     const uid = getState().users.authedId
@@ -71,6 +62,15 @@ export function duckFanout (duck) {
       .catch((err) => {
         console.warn('Error in duckFanout', err)
       })
+  }
+}
+
+export function fetchAndHandleDuck (duckId) {
+  return function (dispatch, getState) {
+    dispatch(fetchingDuck())
+    fetchDuck(duckId)
+      .then((duck) => dispatch(fetchingDuckSuccess(duck)))
+      .catch((error) => dispatch(fetchingDuckError(error)))
   }
 }
 

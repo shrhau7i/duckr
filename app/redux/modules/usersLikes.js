@@ -1,5 +1,5 @@
 import {
-  fetchUsersLikes, saveToUsersDucks, deleteFromUsersLikes,
+  fetchUsersLikes, saveToUsersLikes, deleteFromUsersLikes,
   incrementNumberOfLikes, decrementNumberOfLikes,
 } from 'helpers/api'
 
@@ -45,7 +45,7 @@ function fetchingLikesSuccess (likes) {
 }
 
 export function addAndHandleLike (duckId, e) {
-  e.stopProgagation()
+  e.stopPropagation()
   return function (dispatch, getState) {
     dispatch(addLike(duckId))
 
@@ -61,7 +61,7 @@ export function addAndHandleLike (duckId, e) {
 }
 
 export function handleDeleteLike (duckId, e) {
-  e.stopProgagation()
+  e.stopPropagation()
   return function (dispatch, getState) {
     dispatch(removeLike(duckId))
 
