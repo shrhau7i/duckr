@@ -6,7 +6,7 @@ import {
 
 export default function getRoutes (checkAuth, history) {
   return (
-    <Router history={hashHistory}>
+    <Router history={history}>
       <Route path='/' component={MainContainer}>
         <Route path='auth' component={AuthenticateContainer} onEnter={checkAuth} />
         <Route path='feed' component={FeedContainer} onEnter={checkAuth} />
