@@ -8,17 +8,11 @@ import * as userActionCreators from 'redux/modules/users'
 import { formatUserInfo } from 'helpers/utils'
 import { firebaseAuth } from 'config/constants'
 
-const MainContainer = React.createClass({
-  propTypes: {
-    isAuthed: PropTypes.bool.isRequired,
-    setUsersLikes: PropTypes.func.isRequired,
-    authUser: PropTypes.func.isRequired,
-    fetchingUserSuccess: PropTypes.func.isRequired,
-    removeFetchingUser: PropTypes.func.isRequired,
-  },
-  contextTypes: {
-    router: PropTypes.object.isRequired,
-  },
+class MainContainer extends React.Component {
+  constructor() {
+    super()
+  }
+
   componentDidMount () {
     firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
@@ -34,7 +28,8 @@ const MainContainer = React.createClass({
          this.props.removeFetchingUser()
       }
     })
-  },
+  }
+
   render () {
     return this.props.isFetching === true
       ? null
@@ -44,8 +39,20 @@ const MainContainer = React.createClass({
             {this.props.children}
           </div>
         </div>
-  },
-})
+  }
+}
+
+MainContainer.propTypes = {
+  isAuthed: PropTypes.bool.isRequired,
+  setUsersLikes: PropTypes.func.isRequired,
+  authUser: PropTypes.func.isRequired,
+  fetchingUserSuccess: PropTypes.func.isRequired,
+  removeFetchingUser: PropTypes.func.isRequired,
+}
+
+MainContainer.contextTypes = {
+  router: PropTypes.object.isRequired,
+}
 
 export default connect(
   ({users}) => ({isAuthed: users.isAuthed, isFetching: users.isFetching}),
