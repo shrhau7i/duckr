@@ -6,34 +6,23 @@ import { Duck } from 'components'
 import * as usersLikesAction from 'redux/modules/usersLikes'
 const { func, object, bool, number } = PropTypes
 
-const DuckContainer = React.createClass({
-  propTypes: {
-    duck: object.isRequired,
-    handleClick: func,
-    hideLikeCount: bool.isRequired,
-    hideReplyBtn: bool.isRequired,
-    isLiked: bool.isRequired,
-    numberOfLikes: number,
-    addAndHandleLike: func.isRequired,
-    handleDeleteLike: func.isRequired,
-  },
-  contextTypes: {
-    router: PropTypes.object.isRequired,
-  },
-  getDefaultProps () {
-    return {
-      hideReplyBtn: false,
-      hideLikeCount: true,
-    }
-  },
+class DuckContainer extends React.Component {
+  constructor() {
+    super()
+    this.handleClick = this.handleClick.bind(this)
+    this.goToProfile = this.goToProfile.bind(this)
+  }
+
   goToProfile (e) {
     e.stopPropagation()
     this.context.router.push('/' + this.props.duck.get('uid'))
-  },
+  }
+
   handleClick (e) {
     e.preventDefault()
     this.context.router.push('/duckDetail/' + this.props.duck.get('duckId'))
-  },
+  }
+
   render () {
     return (
       <Duck
@@ -41,8 +30,67 @@ const DuckContainer = React.createClass({
         onClick={this.props.hideReplyBtn === true ? null : this.handleClick}
         {...this.props} />
     )
-  },
-})
+  }
+
+}
+
+DuckContainer.propTypes = {
+  duck: object.isRequired,
+  handleClick: func,
+  hideLikeCount: bool.isRequired,
+  hideReplyBtn: bool.isRequired,
+  isLiked: bool.isRequired,
+  numberOfLikes: number,
+  addAndHandleLike: func.isRequired,
+  handleDeleteLike: func.isRequired,
+}
+
+DuckContainer.contextTypes = {
+  router: PropTypes.object.isRequired,
+}
+
+DuckContainer.defaultProps = {
+  hideReplyBtn: false,
+  hideLikeCount: true,
+}
+
+// const DuckContainer = React.createClass({
+//   propTypes: {
+//     duck: object.isRequired,
+//     handleClick: func,
+//     hideLikeCount: bool.isRequired,
+//     hideReplyBtn: bool.isRequired,
+//     isLiked: bool.isRequired,
+//     numberOfLikes: number,
+//     addAndHandleLike: func.isRequired,
+//     handleDeleteLike: func.isRequired,
+//   },
+//   contextTypes: {
+//     router: PropTypes.object.isRequired,
+//   },
+//   getDefaultProps () {
+//     return {
+//       hideReplyBtn: false,
+//       hideLikeCount: true,
+//     }
+//   },
+//   goToProfile (e) {
+//     e.stopPropagation()
+//     this.context.router.push('/' + this.props.duck.get('uid'))
+//   },
+//   handleClick (e) {
+//     e.preventDefault()
+//     this.context.router.push('/duckDetail/' + this.props.duck.get('duckId'))
+//   },
+//   render () {
+//     return (
+//       <Duck
+//         goToProfile={this.goToProfile}
+//         onClick={this.props.hideReplyBtn === true ? null : this.handleClick}
+//         {...this.props} />
+//     )
+//   },
+// })
 
 function mapStateToProps ({ducks, likeCount, usersLikes}, props) {
   return {
