@@ -1,4 +1,3 @@
-
 import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -31,7 +30,6 @@ class DuckContainer extends React.Component {
         {...this.props} />
     )
   }
-
 }
 
 DuckContainer.propTypes = {
@@ -46,7 +44,7 @@ DuckContainer.propTypes = {
 }
 
 DuckContainer.contextTypes = {
-  router: PropTypes.object.isRequired,
+  router: object.isRequired,
 }
 
 DuckContainer.defaultProps = {
