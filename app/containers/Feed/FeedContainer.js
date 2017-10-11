@@ -4,19 +4,17 @@ import { Feed } from 'components'
 import { bindActionCreators } from 'redux'
 import * as feedActionCreators from 'redux/modules/feed'
 import { List } from 'immutable'
+const { bool, string, func } = PropTypes
 
-const FeedContainer = React.createClass({
-  propTypes: {
-    duckIds: PropTypes.instanceOf(List),
-    newDucksAvailable: PropTypes.bool.isRequired,
-    error: PropTypes.string.isRequired,
-    isFetching: PropTypes.bool.isRequired,
-    setAndHandleFeedListener: PropTypes.func.isRequired,
-    resetNewDucksAvailable: PropTypes.func.isRequired,
-  },
+class FeedContainer extends React.Component {
+  constructor() {
+    super()
+  }
+
   componentDidMount () {
     this.props.setAndHandleFeedListener()
-  },
+  }
+
   render () {
     return (
       <Feed
@@ -26,8 +24,41 @@ const FeedContainer = React.createClass({
         isFetching={this.props.isFetching}
         resetNewDucksAvailable={this.props.resetNewDucksAvailable} />
     )
-  },
-})
+  }
+}
+
+FeedContainer.protoTypes = {
+  duckIds: PropTypes.instanceOf(List),
+  newDucksAvailable: bool.isRequired,
+  error: string.isRequired,
+  isFetching: bool.isRequired,
+  setAndHandleFeedListener: func.isRequired,
+  resetNewDucksAvailable: func.isRequired,
+}
+
+// const FeedContainer = React.createClass({
+//   propTypes: {
+//     duckIds: PropTypes.instanceOf(List),
+//     newDucksAvailable: PropTypes.bool.isRequired,
+//     error: PropTypes.string.isRequired,
+//     isFetching: PropTypes.bool.isRequired,
+//     setAndHandleFeedListener: PropTypes.func.isRequired,
+//     resetNewDucksAvailable: PropTypes.func.isRequired,
+//   },
+//   componentDidMount () {
+//     this.props.setAndHandleFeedListener()
+//   },
+//   render () {
+//     return (
+//       <Feed
+//         duckIds={this.props.duckIds}
+//         newDucksAvailable={this.props.newDucksAvailable}
+//         error={this.props.error}
+//         isFetching={this.props.isFetching}
+//         resetNewDucksAvailable={this.props.resetNewDucksAvailable} />
+//     )
+//   },
+// })
 
 function mapStateToProps ({feed}) {
   return {
