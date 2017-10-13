@@ -7,6 +7,7 @@ import * as usersLikesActionCreators from 'redux/modules/usersLikes'
 import * as userActionCreators from 'redux/modules/users'
 import { formatUserInfo } from 'helpers/utils'
 import { firebaseAuth } from 'config/constants'
+const { bool, func, object } = PropTypes
 
 class MainContainer extends React.Component {
   constructor() {
@@ -43,15 +44,15 @@ class MainContainer extends React.Component {
 }
 
 MainContainer.propTypes = {
-  isAuthed: PropTypes.bool.isRequired,
-  setUsersLikes: PropTypes.func.isRequired,
-  authUser: PropTypes.func.isRequired,
-  fetchingUserSuccess: PropTypes.func.isRequired,
-  removeFetchingUser: PropTypes.func.isRequired,
+  isAuthed: bool.isRequired,
+  setUsersLikes: func.isRequired,
+  authUser: func.isRequired,
+  fetchingUserSuccess: func.isRequired,
+  removeFetchingUser: func.isRequired,
 }
 
 MainContainer.contextTypes = {
-  router: PropTypes.object.isRequired,
+  router: object.isRequired,
 }
 
 export default connect(
