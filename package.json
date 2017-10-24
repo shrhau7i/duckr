@@ -2,9 +2,10 @@
   "name": "Redux-Immutable",
   "version": "1.0.0",
   "description": "<img src=\"http://www.reactjsprogram.com/images/reactjsprogram-500.png\" width=\"250\" align=\"right\">",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "npm run dev && NODE_ENV=production node server.js",
+    "dev": "webpack-dev-server",
     "production": "webpack -p",
     "lint": "eslint app/.; exit 0",
     "fix": "eslint --fix app/.; exit 0"
@@ -21,6 +22,7 @@
   },
   "homepage": "https://github.com/ReactjsProgram/Redux-Immutable#readme",
   "dependencies": {
+    "express": "^4.16.2",
     "firebase": "^3.4.1",
     "immutable": "^3.8.1",
     "react": "^15.0.1",
