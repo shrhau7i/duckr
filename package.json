@@ -12,11 +12,16 @@
     "test": "jest"
   },
   "jest": {
+    "moduleFileExtensions": [
+      "js"
+    ],
     "moduleNameMapper": {
+      "^containers$": "<rootDir>/app/containers/index.js",
+      "^components$": "<rootDir>/app/components/index.js",
+      "^redux/modules/usersLikes$": "<rootDir>/app/redux/modules/usersLikes.js",
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|less)$": "identity-obj-proxy"
-    },
-    "testRegex": "app/.*\\.(js|jsx)$"
+    }
   },
   "repository": {
     "type": "git",
