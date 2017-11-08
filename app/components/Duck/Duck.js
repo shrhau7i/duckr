@@ -1,13 +1,13 @@
-import React, { PropTypes } from 'react'
-import { formatTimestamp } from 'helpers/utils'
-import Reply from 'react-icons/lib/fa/mail-reply'
-import Star from 'react-icons/lib/fa/star'
+import React, { PropTypes } from 'react';
+import { formatTimestamp } from 'helpers/utils';
+import Reply from 'react-icons/lib/fa/mail-reply';
+import Star from 'react-icons/lib/fa/star';
 import {
   duckContainer, contentContainer, avatar, actionContainer,
   header, text, likeReplyContainer, icon, likedIcon, author,
-} from './styles.css'
+} from './styles.css';
 
-import { Map } from 'immutable'
+import { Map } from 'immutable';
 
 Duck.propTypes = {
   // duck: PropTypes.shape({
@@ -27,11 +27,11 @@ Duck.propTypes = {
   hideReplyBtn: PropTypes.bool.isRequired,
   hideLikeCount: PropTypes.bool.isRequired,
   goToProfile: PropTypes.func.isRequired,
-}
+};
 
 export default function Duck (props) {
-  const starIcon = props.isLiked === true ? likedIcon : icon
-  const starFn = props.isLiked === true ? props.handleDeleteLike : props.addAndHandleLike
+  const starIcon = props.isLiked === true ? likedIcon : icon;
+  const starFn = props.isLiked === true ? props.handleDeleteLike : props.addAndHandleLike;
   return (
     <div
       className={duckContainer}
@@ -55,5 +55,5 @@ export default function Duck (props) {
           </div>
         </div>
     </div>
-  )
+  );
 }

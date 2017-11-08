@@ -1,8 +1,8 @@
-import React from 'react'
-import { Router, Route, IndexRoute } from 'react-router'
+import React from 'react';
+import { Router, Route, IndexRoute } from 'react-router';
 import {
   MainContainer, HomeContainer, AuthenticateContainer, FeedContainer,
-  LogoutContainer, UserContainer, DuckDetailsContainer } from 'containers'
+  LogoutContainer, UserContainer, DuckDetailsContainer } from 'containers';
 
 export default function getRoutes (checkAuth, history) {
   return (
@@ -16,5 +16,5 @@ export default function getRoutes (checkAuth, history) {
         <IndexRoute component={HomeContainer} onEnter={checkAuth}/>
       </Route>
     </Router>
-  )
+  );
 }

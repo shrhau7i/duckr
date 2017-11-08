@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react'
-import { default as ReactModal } from 'react-modal'
+import React, { PropTypes } from 'react';
+import { default as ReactModal } from 'react-modal';
 import {
   newDuckTop, pointer, newDuckInputContainer,
-  newDuckInput, submitDuckBtn, darkBtn } from './styles.css'
-import { formatDuck } from 'helpers/utils'
+  newDuckInput, submitDuckBtn, darkBtn } from './styles.css';
+import { formatDuck } from 'helpers/utils';
 
 const modalStyles = {
   content: {
@@ -14,9 +14,9 @@ const modalStyles = {
     background: '#EBEBEB',
     padding: 0,
   },
-}
+};
 
-const { object, string, func, bool } = PropTypes
+const { object, string, func, bool } = PropTypes;
 Modal.propTypes = {
   duckText: string.isRequired,
   closeModal: func.isRequired,
@@ -26,11 +26,11 @@ Modal.propTypes = {
   duckFanout: func.isRequired,
   updateDuckText: func.isRequired,
   user: object.isRequired,
-}
+};
 
 export default function Modal (props) {
   function submitDuck () {
-    return props.duckFanout(formatDuck(props.duckText, props.user))
+    return props.duckFanout(formatDuck(props.duckText, props.user));
   }
 
   return (
@@ -58,5 +58,5 @@ export default function Modal (props) {
         </button>
       </ReactModal>
     </span>
-  )
+  );
 }

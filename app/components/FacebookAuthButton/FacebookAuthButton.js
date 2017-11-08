@@ -1,10 +1,10 @@
-import React, { PropTypes } from 'react'
-import { button } from './styles.css'
+import React, { PropTypes } from 'react';
+import { button } from './styles.css';
 
 FacebookAuthButton.propTypes = {
   onAuth: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
-}
+};
 
 export default function FacebookAuthButton ({onAuth, isFetching}) {
   return (
@@ -13,5 +13,5 @@ export default function FacebookAuthButton ({onAuth, isFetching}) {
         ? 'Loading'
         : 'Login with facebook'}
     </button>
-  )
+  );
 }

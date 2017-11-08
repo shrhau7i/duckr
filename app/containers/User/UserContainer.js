@@ -1,22 +1,22 @@
-import React from 'react'
-import { PropTypes } from 'prop-types'
-import { User } from 'components'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { staleDucks, staleUser } from 'helpers/utils'
-import * as usersActionCreators from 'redux/modules/users'
-import * as usersDucksActionCreators from 'redux/modules/usersDucks'
-const { string, bool, number, array, shape, func } = PropTypes
+import React from 'react';
+import { PropTypes } from 'prop-types';
+import { User } from 'components';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { staleDucks, staleUser } from 'helpers/utils';
+import * as usersActionCreators from 'redux/modules/users';
+import * as usersDucksActionCreators from 'redux/modules/usersDucks';
+const { string, bool, number, shape, func } = PropTypes;
 
 class UserContainer extends React.Component {
   componentDidMount () {
-    const uid = this.props.routeParams.uid
+    const uid = this.props.routeParams.uid;
     if (this.props.noUser === true || staleUser(this.props.lastUpdated)) {
-      this.props.fetchAndHandleUser(uid)
+      this.props.fetchAndHandleUser(uid);
     }
 
     if (this.props.noUser === true || staleDucks(this.props.lastUpdated)) {
-      this.props.fetchAndHandleUsersDucks(uid)
+      this.props.fetchAndHandleUsersDucks(uid);
     }
   }
 
@@ -28,7 +28,7 @@ class UserContainer extends React.Component {
         name={this.props.name}
         error={this.props.error}
         duckIds={this.props.duckIds} />
-    )
+    );
   }
 }
 
@@ -42,7 +42,7 @@ UserContainer.propTypes = {
   routeParams: shape({uid: string.isRequired}),
   fetchAndHandleUsersDucks: func.isRequired,
   fetchAndHandleUser: func.isRequired,
-}
+};
 
 // const UserContainer = React.createClass({
 //   propTypes: {
@@ -79,10 +79,10 @@ UserContainer.propTypes = {
 // })
 
 function mapStateToProps ({users, usersDucks}, props) {
-  const specificUsersDucks = usersDucks[props.routeParams.uid]
-  const user = users[props.routeParams.uid]
-  const noUser = typeof user === 'undefined'
-  const name = noUser ? '' : user.info.name
+  const specificUsersDucks = usersDucks[props.routeParams.uid];
+  const user = users[props.routeParams.uid];
+  const noUser = typeof user === 'undefined';
+  const name = noUser ? '' : user.info.name;
   return {
     noUser,
     name,
@@ -90,17 +90,17 @@ function mapStateToProps ({users, usersDucks}, props) {
     error: users.error || usersDucks.error,
     lastUpdated: specificUsersDucks ? specificUsersDucks.lastUpdated : 0,
     duckIds: specificUsersDucks ? specificUsersDucks.duckIds : [],
-  }
+  };
 }
 
 function mapDispatchToProps (dispatch) {
   return bindActionCreators({
     ...usersActionCreators,
-    ...usersDucksActionCreators
-  }, dispatch)
+    ...usersDucksActionCreators,
+  }, dispatch);
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UserContainer)
+)(UserContainer);

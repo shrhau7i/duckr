@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react'
-import { userContainer, header } from './styles.css'
-import { errorMsg } from 'sharedStyles/styles.css'
-import { DuckContainer } from 'containers'
+import React, { PropTypes } from 'react';
+import { userContainer, header } from './styles.css';
+import { errorMsg } from 'sharedStyles/styles.css';
+import { DuckContainer } from 'containers';
 
 User.propTypes = {
   noUser: PropTypes.bool.isRequired,
@@ -9,7 +9,7 @@ User.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
   duckIds: PropTypes.array.isRequired,
-}
+};
 
 export default function User (props) {
   return props.noUser === true
@@ -31,5 +31,5 @@ export default function User (props) {
                   : null}
             </div>}
         {props.error ? <p className={errorMsg}>{props.error}</p> : null}
-      </div>
+      </div>;
 }

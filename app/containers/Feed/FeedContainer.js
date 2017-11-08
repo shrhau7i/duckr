@@ -1,18 +1,18 @@
-import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { Feed } from 'components'
-import { bindActionCreators } from 'redux'
-import * as feedActionCreators from 'redux/modules/feed'
-import { List } from 'immutable'
-const { bool, string, func } = PropTypes
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { Feed } from 'components';
+import { bindActionCreators } from 'redux';
+import * as feedActionCreators from 'redux/modules/feed';
+import { List } from 'immutable';
+const { bool, string, func } = PropTypes;
 
 class FeedContainer extends React.Component {
-  constructor() {
-    super()
+  constructor () {
+    super();
   }
 
   componentDidMount () {
-    this.props.setAndHandleFeedListener()
+    this.props.setAndHandleFeedListener();
   }
 
   render () {
@@ -23,7 +23,7 @@ class FeedContainer extends React.Component {
         error={this.props.error}
         isFetching={this.props.isFetching}
         resetNewDucksAvailable={this.props.resetNewDucksAvailable} />
-    )
+    );
   }
 }
 
@@ -34,7 +34,7 @@ FeedContainer.protoTypes = {
   isFetching: bool.isRequired,
   setAndHandleFeedListener: func.isRequired,
   resetNewDucksAvailable: func.isRequired,
-}
+};
 
 // const FeedContainer = React.createClass({
 //   propTypes: {
@@ -62,11 +62,11 @@ FeedContainer.protoTypes = {
 
 function mapStateToProps ({feed}) {
   return {
-    newDucksAvailable:feed.get('newDucksAvailable'),
+    newDucksAvailable: feed.get('newDucksAvailable'),
     error: feed.get('error'),
     isFetching: feed.get('isFetching'),
-    duckIds: feed.get('duckIds')
-  }
+    duckIds: feed.get('duckIds'),
+  };
 
   // const { newDucksAvailable, error, isFetching, duckIds } = feed
   // return {
@@ -80,4 +80,4 @@ function mapStateToProps ({feed}) {
 export default connect(
   mapStateToProps,
   (dispatch) => bindActionCreators(feedActionCreators, dispatch)
-)(FeedContainer)
+)(FeedContainer);

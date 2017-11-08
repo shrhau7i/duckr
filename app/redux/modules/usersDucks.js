@@ -1,24 +1,24 @@
-import { fetchUsersDucks } from 'helpers/api'
-import { addMultipleDucks } from 'redux/modules/ducks'
+import { fetchUsersDucks } from 'helpers/api';
+import { addMultipleDucks } from 'redux/modules/ducks';
 
-const FETCHING_USERS_DUCKS = 'FETCHING_USERS_DUCKS'
-const FETCHING_USERS_DUCKS_ERROR = 'FETCHING_USERS_DUCKS_ERROR'
-const FETCHING_USERS_DUCKS_SUCCESS = 'FETCHING_USERS_DUCKS_SUCCESS'
-const ADD_SINGLE_USERS_DUCK = 'ADD_SINGLE_USERS_DUCK'
+const FETCHING_USERS_DUCKS = 'FETCHING_USERS_DUCKS';
+const FETCHING_USERS_DUCKS_ERROR = 'FETCHING_USERS_DUCKS_ERROR';
+const FETCHING_USERS_DUCKS_SUCCESS = 'FETCHING_USERS_DUCKS_SUCCESS';
+const ADD_SINGLE_USERS_DUCK = 'ADD_SINGLE_USERS_DUCK';
 
 function fetchingUsersDucks (uid) {
   return {
     type: FETCHING_USERS_DUCKS,
     uid,
-  }
+  };
 }
 
 function fetchingUsersDucksError (error) {
-  console.warn(error)
+  console.warn(error);
   return {
     type: FETCHING_USERS_DUCKS_ERROR,
     error: 'Error fetching Users Duck Ids',
-  }
+  };
 }
 
 function fetchingUsersDucksSuccess (uid, duckIds, lastUpdated) {
@@ -27,7 +27,7 @@ function fetchingUsersDucksSuccess (uid, duckIds, lastUpdated) {
     uid,
     duckIds,
     lastUpdated,
-  }
+  };
 }
 
 export function addSingleUsersDuck (uid, duckId) {
@@ -35,13 +35,12 @@ export function addSingleUsersDuck (uid, duckId) {
     type: ADD_SINGLE_USERS_DUCK,
     uid,
     duckId,
-  }
+  };
 }
-
 
 export function fetchAndHandleUsersDucks (uid) {
   return function (dispatch) {
-    dispatch(fetchingUsersDucks())
+    dispatch(fetchingUsersDucks());
 
     fetchUsersDucks(uid)
       .then((ducks) => dispatch(addMultipleDucks(ducks)))
@@ -52,14 +51,14 @@ export function fetchAndHandleUsersDucks (uid) {
           Date.now()
         )
       ))
-      .catch((error) => dispatch(fetchingUsersDucksError(error)))
-  }
+      .catch((error) => dispatch(fetchingUsersDucksError(error)));
+  };
 }
 
 const initialUsersDuckState = {
   lastUpdated: 0,
   duckIds: [],
-}
+};
 
 function usersDuck (state = initialUsersDuckState, action) {
   switch (action.type) {
@@ -67,16 +66,16 @@ function usersDuck (state = initialUsersDuckState, action) {
       return {
         ...state,
         duckIds: state.duckIds.concat([action.duckId]),
-      }
+      };
     default :
-      return state
+      return state;
   }
 }
 
 const initialState = {
   isFetching: true,
   error: '',
-}
+};
 
 export default function usersDucks (state = initialState, action) {
   switch (action.type) {
@@ -84,13 +83,13 @@ export default function usersDucks (state = initialState, action) {
       return {
         ...state,
         isFetching: true,
-      }
+      };
     case FETCHING_USERS_DUCKS_ERROR :
       return {
         ...state,
         isFetching: false,
         error: action.error,
-      }
+      };
     case FETCHING_USERS_DUCKS_SUCCESS :
       return {
         ...state,
@@ -100,7 +99,7 @@ export default function usersDucks (state = initialState, action) {
           lastUpdated: action.lastUpdated,
           duckIds: action.duckIds,
         },
-      }
+      };
     case ADD_SINGLE_USERS_DUCK :
       return typeof state[action.uid] === 'undefined'
         ? state
@@ -109,8 +108,8 @@ export default function usersDucks (state = initialState, action) {
           isFetching: false,
           error: '',
           [action.uid]: usersDuck(state[action.uid], action),
-        }
+        };
     default :
-      return state
+      return state;
   }
 }

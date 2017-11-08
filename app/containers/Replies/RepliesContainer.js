@@ -1,19 +1,19 @@
-import React, { PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { Replies } from 'components'
-import { staleReplies } from 'helpers/utils'
-import * as repliesActionCreators from 'redux/modules/replies'
-const { bool, string, number, object, func } = PropTypes
+import React, { PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Replies } from 'components';
+import { staleReplies } from 'helpers/utils';
+import * as repliesActionCreators from 'redux/modules/replies';
+const { bool, string, number, object, func } = PropTypes;
 
 class RepliesContainer extends React.Component {
-  constructor() {
-    super()
+  constructor () {
+    super();
   }
 
   componentDidMount () {
     if (staleReplies(this.props.lastUpdated)) {
-      this.props.fetchAndHandleReplies(this.props.duckId)
+      this.props.fetchAndHandleReplies(this.props.duckId);
     }
   }
 
@@ -24,7 +24,7 @@ class RepliesContainer extends React.Component {
         error={this.props.error}
         lastUpdated={this.props.lastUpdated}
         replies={this.props.replies} />
-    )
+    );
   }
 }
 
@@ -35,12 +35,12 @@ RepliesContainer.propTypes = {
   replies: object,
   duckId: string.isRequired,
   fetchAndHandleReplies: func.isRequired,
-}
+};
 
 RepliesContainer.defaultProps = {
   lastUpdated: 0,
   replies: {},
-}
+};
 // const RepliesContainer = React.createClass({
 //   propTypes: {
 //     isFetching: PropTypes.bool.isRequired,
@@ -73,17 +73,17 @@ RepliesContainer.defaultProps = {
 // })
 
 function mapStateToProps (state, props) {
-  const duckRepliesInfo = state.replies[props.duckId] || {}
-  const { lastUpdated, replies } = duckRepliesInfo
+  const duckRepliesInfo = state.replies[props.duckId] || {};
+  const { lastUpdated, replies } = duckRepliesInfo;
   return {
     isFetching: state.replies.isFetching,
     error: state.replies.error,
     lastUpdated,
     replies,
-  }
+  };
 }
 
 export default connect(
   mapStateToProps,
   (dispatch) => bindActionCreators(repliesActionCreators, dispatch)
-)(RepliesContainer)
+)(RepliesContainer);

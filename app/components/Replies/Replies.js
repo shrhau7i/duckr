@@ -1,14 +1,14 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes } from 'react';
 import {
   avatar, replyContainer, header,
-  cushion, center, author } from './styles.css'
-import { formatTimestamp } from 'helpers/utils'
-import { errorMsg } from 'sharedStyles/styles.css'
-const { bool, string, object } = PropTypes
+  cushion, center, author } from './styles.css';
+import { formatTimestamp } from 'helpers/utils';
+import { errorMsg } from 'sharedStyles/styles.css';
+const { bool, string, object } = PropTypes;
 
 Reply.propTypes = {
   comment: object.isRequired,
-}
+};
 
 function Reply ({comment}) {
   return (
@@ -20,17 +20,17 @@ function Reply ({comment}) {
         <div className={cushion}>{comment.reply}</div>
       </div>
     </div>
-  )
+  );
 }
 
 Replies.propTypes = {
   isFetching: bool.isRequired,
   error: string.isRequired,
   replies: object,
-}
+};
 
 function Replies ({replies, error, isFetching}) {
-  const replyIds = Object.keys(replies)
+  const replyIds = Object.keys(replies);
   return (
     <div>
       {error ? <h3 className={errorMsg}>{error}</h3> : null}
@@ -44,7 +44,7 @@ function Replies ({replies, error, isFetching}) {
           </div>}
       {replyIds.length === 0 ? <h3 className={center}>{'Be the first to comment. 😎'}</h3> : null}
     </div>
-  )
+  );
 }
 
-export default Replies
+export default Replies;

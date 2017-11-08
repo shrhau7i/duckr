@@ -1,19 +1,19 @@
-import React, { PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { DuckDetails } from 'components'
-import * as duckActionCreators from 'redux/modules/ducks'
-import * as likeCountActionCreators from 'redux/modules/likeCount'
-import * as repliesActionCreators from 'redux/modules/replies'
-const { func, object, string, bool } = PropTypes
+import React, { PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { DuckDetails } from 'components';
+import * as duckActionCreators from 'redux/modules/ducks';
+import * as likeCountActionCreators from 'redux/modules/likeCount';
+import * as repliesActionCreators from 'redux/modules/replies';
+const { func, object, string, bool } = PropTypes;
 
 class DuckDetailsContainer extends React.Component {
   componentDidMount () {
-    this.props.initLikeFetch(this.props.duckId)
+    this.props.initLikeFetch(this.props.duckId);
     if (this.props.duckAlreadyFetched === false) {
-      this.props.fetchAndHandleDuck(this.props.duckId)
+      this.props.fetchAndHandleDuck(this.props.duckId);
     } else {
-      this.props.removeFetching()
+      this.props.removeFetching();
     }
   }
 
@@ -25,7 +25,7 @@ class DuckDetailsContainer extends React.Component {
         duckId={this.props.duckId}
         error={this.props.error}
         isFetching={this.props.isFetching} />
-    )
+    );
   }
 }
 
@@ -39,7 +39,7 @@ DuckDetailsContainer.propTypes = {
   duckAlreadyFetched: bool.isRequired,
   initLikeFetch: func.isRequired,
   addAndHandleReply: func.isRequired,
-}
+};
 
 // const DuckDetailsContainer = React.createClass({
 //   propTypes: {
@@ -80,8 +80,8 @@ function mapStateToProps ({ducks, likeCount, users}, props) {
     error: ducks.get('error'),
     authedUser: users[users.authedId].info,
     duckId: props.routeParams.duckId,
-    duckAlreadyFetched: !!ducks.get(props.routeParams.duckId)
-  }
+    duckAlreadyFetched: !!ducks.get(props.routeParams.duckId),
+  };
 }
 
 function mapDispatchToProps (dispatch) {
@@ -89,10 +89,10 @@ function mapDispatchToProps (dispatch) {
     ...duckActionCreators,
     ...likeCountActionCreators,
     ...repliesActionCreators,
-  }, dispatch)
+  }, dispatch);
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(DuckDetailsContainer)
+)(DuckDetailsContainer);

@@ -1,6 +1,5 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Home } from 'components'
+import React from 'react';
+import { Home } from 'components';
 
 // const HomeContainer = React.createClass({
 //   render () {
@@ -10,7 +9,6 @@ import { Home } from 'components'
 //   },
 // })
 
-const HomeContainer = () => <Home />
+const HomeContainer = () => <Home />;
 
-
-export default HomeContainer
+export default HomeContainer;

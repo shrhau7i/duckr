@@ -1,23 +1,23 @@
-import React, { PropTypes } from 'react'
-import { DuckContainer, RepliesContainer } from 'containers'
+import React, { PropTypes } from 'react';
+import { DuckContainer, RepliesContainer } from 'containers';
 import {
   mainContainer, container, content, repliesContainer,
-  replyTextAreaContainer, replyTextArea } from './styles.css'
-import { subHeader, darkBtn, errorMsg } from 'sharedStyles/styles.css'
-import { formatReply } from 'helpers/utils'
+  replyTextAreaContainer, replyTextArea } from './styles.css';
+import { subHeader, darkBtn, errorMsg } from 'sharedStyles/styles.css';
+import { formatReply } from 'helpers/utils';
 
 Reply.propTypes = {
-  submit: PropTypes.func.isRequired
-}
+  submit: PropTypes.func.isRequired,
+};
 
 function Reply ({submit}) {
   function handleSubmit (e) {
     if (Reply.ref.value.length === 0) {
-      return
+      return;
     }
 
-    submit(Reply.ref.value, e)
-    Reply.ref.value = ''
+    submit(Reply.ref.value, e);
+    Reply.ref.value = '';
   }
 
   return (
@@ -32,7 +32,7 @@ function Reply ({submit}) {
         {'Submit'}
       </button>
     </div>
-  )
+  );
 }
 
 DuckDetails.propTypes = {
@@ -41,7 +41,7 @@ DuckDetails.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
   addAndHandleReply: PropTypes.func.isRequired,
-}
+};
 
 export default function DuckDetails ({duckId, isFetching, authedUser, error, addAndHandleReply}) {
   return (
@@ -59,5 +59,5 @@ export default function DuckDetails ({duckId, isFetching, authedUser, error, add
           </div>}
       {error ? <p className={errorMsg}>{error}</p> : null}
     </div>
-  )
+  );
 }

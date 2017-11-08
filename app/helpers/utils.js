@@ -1,11 +1,11 @@
-import { usersDucksExpirationLength, userExpirationLength, repliesExpirationLength } from 'config/constants'
+import { usersDucksExpirationLength, userExpirationLength, repliesExpirationLength } from 'config/constants';
 
 export function formatUserInfo (name, avatar, uid) {
   return {
     name,
     avatar,
     uid,
-  }
+  };
 }
 
 export function formatDuck (text, {name, avatar, uid}) {
@@ -15,28 +15,28 @@ export function formatDuck (text, {name, avatar, uid}) {
     avatar,
     uid,
     timestamp: Date.now(),
-  }
+  };
 }
 
 export function formatTimestamp (timestamp) {
-  const date = new Date(timestamp)
-  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+  const date = new Date(timestamp);
+  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 }
 
 function getMilliseconds (timestamp) {
-  return new Date().getTime() - new Date(timestamp).getTime()
+  return new Date().getTime() - new Date(timestamp).getTime();
 }
 
 export function staleDucks (timestamp) {
-  return getMilliseconds(timestamp) > usersDucksExpirationLength
+  return getMilliseconds(timestamp) > usersDucksExpirationLength;
 }
 
 export function staleUser (timestamp) {
-  return getMilliseconds(timestamp) > userExpirationLength
+  return getMilliseconds(timestamp) > userExpirationLength;
 }
 
 export function staleReplies (timestamp) {
-  return getMilliseconds(timestamp) > repliesExpirationLength
+  return getMilliseconds(timestamp) > repliesExpirationLength;
 }
 
 export function formatReply ({name, uid, avatar}, reply) {
@@ -45,6 +45,6 @@ export function formatReply ({name, uid, avatar}, reply) {
     reply,
     uid,
     avatar,
-    timestamp: Date.now()
-  }
+    timestamp: Date.now(),
+  };
 }
