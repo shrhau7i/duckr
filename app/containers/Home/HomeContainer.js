@@ -1,14 +1,23 @@
 import React from 'react';
 import { Home } from 'components';
+import i18next from 'config/i18n';
 
-// const HomeContainer = React.createClass({
-//   render () {
-//     return (
-//       <Home />
-//     )
-//   },
-// })
+class HomeContainer extends React.Component {
+  componentDidMount () {
+    document.querySelector('button').addEventListener('click', () => {
+      if (i18next.language !== 'en') {
+        i18next.changeLanguage('en');
+      } else {
+        i18next.changeLanguage('cn');
+      }
+    });
+  }
 
-const HomeContainer = () => <Home />;
+  render () {
+    return (
+      <Home />
+    )
+  }
+}
 
 export default HomeContainer;
