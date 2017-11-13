@@ -7,9 +7,6 @@ import * as repliesActionCreators from 'redux/modules/replies';
 const { bool, string, number, object, func } = PropTypes;
 
 class RepliesContainer extends React.Component {
-  constructor () {
-    super();
-  }
 
   componentDidMount () {
     if (staleReplies(this.props.lastUpdated)) {

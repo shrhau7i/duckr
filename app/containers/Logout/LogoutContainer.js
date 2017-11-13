@@ -5,9 +5,6 @@ import { logoutAndUnauth } from 'redux/modules/users';
 const { func } = PropTypes;
 
 class LogoutContainer extends React.Component {
-  constructor () {
-    super();
-  }
 
   componentDidMount () {
     this.props.dispatch(logoutAndUnauth());

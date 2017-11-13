@@ -23,7 +23,7 @@ function Reply ({submit}) {
   return (
     <div className={replyTextAreaContainer}>
       <textarea
-        ref={(ref) => Reply.ref = ref}
+        ref={(ref) => { Reply.ref = ref; }}
         className={replyTextArea}
         maxLength={140}
         placeholder='Your response'

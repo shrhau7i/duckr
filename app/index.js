@@ -15,8 +15,8 @@ const store = createStore(
   applyMiddleware(thunk),
   window.devToolsExtension ? window.devToolsExtension() : (f) => f
 ));
-console.log(store);
-console.log(store.getState());
+// console.log(store);
+// console.log(store.getState());
 
 const history = syncHistoryWithStore(hashHistory, store);
 

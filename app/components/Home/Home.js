@@ -2,8 +2,6 @@ import React from 'react';
 import { container, title, slogan } from './styles.css';
 import { I18n } from 'react-i18next';
 
-import i18next from 'config/i18n'; // initialized i18next instance using reactI18nextModule
-
 export default function Home () {
   return (
     <I18n>
