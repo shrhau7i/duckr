@@ -15,12 +15,18 @@ i18next
         translation: {
           title: { label: 'Duckr' },
           description: { label: 'The real time, cloud based, modular, scalable, growth hack, social platform. In the cloud.' },
+          logout: { label: 'Logout' },
+          home: { label: 'Home' },
+          authenticate: { label: 'Authenticate' },
         },
       },
       cn: {
         translation: {
           title: { label: '偽推特' },
           description: { label: '偽推特的社交網站' },
+          logout: { label: '登出' },
+          home: { label:  '首頁' },
+          authenticate: { label: '登入' },
         },
       },
     },
