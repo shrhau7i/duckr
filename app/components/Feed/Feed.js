@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { PropTypes } from 'prop-types';
 import { newDuckContainer, header } from './styles.css';
 import { DuckContainer } from 'containers';
 import { errorMsg } from 'sharedStyles/styles.css';

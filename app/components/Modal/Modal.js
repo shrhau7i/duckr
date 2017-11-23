@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { PropTypes } from 'prop-types';
 import { default as ReactModal } from 'react-modal';
 import {
   newDuckTop, pointer, newDuckInputContainer,

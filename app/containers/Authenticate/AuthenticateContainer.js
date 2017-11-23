@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { PropTypes } from 'prop-types';
 import { Authenticate } from 'components';
 // import auth from 'helpers/auth';
 import { bindActionCreators } from 'redux';

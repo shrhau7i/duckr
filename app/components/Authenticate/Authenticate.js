@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { PropTypes } from 'prop-types';
 import { centeredContainer, largeHeader, errorMsg } from 'sharedStyles/styles.css';
 import { FacebookAuthButton } from 'components';
 

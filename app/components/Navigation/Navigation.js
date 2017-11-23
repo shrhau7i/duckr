@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { PropTypes } from 'prop-types';
 import { Link } from 'react-router';
 import { ModalContainer } from 'containers';
 import { container, navContainer, link } from './styles.css';
@@ -21,18 +22,6 @@ function NavLinks ({isAuthed}) {
       </I18n>
     : null;
 }
-
-// <I18n>
-//   {(t) => {
-//     return (
-//         <div className={container}>
-//           <p className={title}>{t('title.label')}</p>
-//           <p className={slogan}>{t('description.label')}</p>
-//           <button>{'Toggle Language'}</button>
-//         </div>
-//       );
-//   }}
-// </I18n>
 
 // function ActionLinks ({isAuthed}) {
 //   return isAuthed === true
