@@ -8,10 +8,6 @@ import { List } from 'immutable';
 const { bool, string, func } = PropTypes;
 
 class FeedContainer extends React.Component {
-  constructor () {
-    super();
-  }
-
   componentDidMount () {
     this.props.setAndHandleFeedListener();
   }
@@ -28,7 +24,7 @@ class FeedContainer extends React.Component {
   }
 }
 
-FeedContainer.protoTypes = {
+FeedContainer.propTypes = {
   duckIds: PropTypes.instanceOf(List),
   newDucksAvailable: bool.isRequired,
   error: string.isRequired,

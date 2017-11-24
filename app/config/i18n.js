@@ -25,7 +25,7 @@ i18next
           title: { label: '偽推特' },
           description: { label: '偽推特的社交網站' },
           logout: { label: '登出' },
-          home: { label:  '首頁' },
+          home: { label: '首頁' },
           authenticate: { label: '登入' },
         },
       },

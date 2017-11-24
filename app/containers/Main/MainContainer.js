@@ -8,13 +8,9 @@ import * as usersLikesActionCreators from 'redux/modules/usersLikes';
 import * as userActionCreators from 'redux/modules/users';
 import { formatUserInfo } from 'helpers/utils';
 import { firebaseAuth } from 'config/constants';
-const { bool, func, object } = PropTypes;
+const { bool, func, object, string } = PropTypes;
 
 class MainContainer extends React.Component {
-  constructor () {
-    super();
-  }
-
   componentDidMount () {
     firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
@@ -50,6 +46,10 @@ MainContainer.propTypes = {
   authUser: func.isRequired,
   fetchingUserSuccess: func.isRequired,
   removeFetchingUser: func.isRequired,
+  location: object.isRequired,
+  pathname: string.isRequired,
+  children: object.isRequired,
+  isFetching: bool.isRequired,
 };
 
 MainContainer.contextTypes = {

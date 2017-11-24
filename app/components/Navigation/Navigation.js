@@ -56,7 +56,7 @@ function ActionLinks ({isAuthed}) {
             </ul>
           );
         }}
-      </I18n>
+      </I18n>;
 }
 
 export default function Navigation ({isAuthed}) {
