@@ -18,7 +18,7 @@
   extends: ["eslint:recommended", "plugin:react/recommended", "standard"],
   "rules": {
     "no-console": [2, {allow: ["warn", "error"]}],
-    "comma-dangle" : [2, "always-multiline"],
+    "comma-dangle": [2, "always-multiline"],
     "semi": [2, "always"],
     "no-extra-semi": 2,
     "jsx-quotes": [2, "prefer-single"],
@@ -28,6 +28,7 @@
     "react/jsx-max-props-per-line": [2, {maximum: 3}],
     "react/jsx-no-literals": 2,
     "react/self-closing-comp": 2,
-    "react/sort-comp": 2
+    "react/sort-comp": 2,
+    "react/display-name": 0
   },
 }
