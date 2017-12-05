@@ -3,7 +3,6 @@
     "react",
     "env",
     "stage-0",
-    { "modules": false }
   ],
   "env": {
     "start": {
