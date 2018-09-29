@@ -4,21 +4,21 @@ const FETCHING_COUNT = 'FETCHING_COUNT';
 const FETCHING_COUNT_ERROR = 'FETCHING_COUNT_ERROR';
 const FETCHING_COUNT_SUCCESS = 'FETCHING_COUNT_SUCCESS';
 
-function fetchingCount () {
+function fetchingCount() {
   return {
     type: FETCHING_COUNT,
   };
 }
 
-function fetchingCountError (error) {
+function fetchingCountError(error) {
   console.warn(error);
   return {
     type: FETCHING_COUNT_ERROR,
-    error: 'Error fetching duck\'s like count',
+    error: "Error fetching duck's like count",
   };
 }
 
-function fetchingCountSuccess (duckId, count) {
+function fetchingCountSuccess(duckId, count) {
   return {
     type: FETCHING_COUNT_SUCCESS,
     duckId,
@@ -26,22 +26,22 @@ function fetchingCountSuccess (duckId, count) {
   };
 }
 
-export function initLikeFetch (duckId) {
-  return function (dispatch) {
+export function initLikeFetch(duckId) {
+  return function(dispatch) {
     dispatch(fetchingCount());
     fetchLikeCount(duckId)
-      .then((count) => dispatch(fetchingCountSuccess(duckId, count)))
-      .catch((error) => dispatch(fetchingCountError(error)));
+      .then(count => dispatch(fetchingCountSuccess(duckId, count)))
+      .catch(error => dispatch(fetchingCountError(error)));
   };
 }
 
-function count (state = 0, action) {
+function count(state = 0, action) {
   switch (action.type) {
-    case ADD_LIKE :
+    case ADD_LIKE:
       return state + 1;
-    case REMOVE_LIKE :
+    case REMOVE_LIKE:
       return state - 1;
-    default :
+    default:
       return state;
   }
 }
@@ -51,34 +51,34 @@ const initialState = {
   error: '',
 };
 
-export default function likeCount (state = initialState, action) {
+export default function likeCount(state = initialState, action) {
   switch (action.type) {
-    case FETCHING_COUNT :
+    case FETCHING_COUNT:
       return {
         ...state,
         isFetching: true,
       };
-    case FETCHING_COUNT_ERROR :
+    case FETCHING_COUNT_ERROR:
       return {
         ...state,
         isFetching: false,
         error: action.error,
       };
-    case FETCHING_COUNT_SUCCESS :
+    case FETCHING_COUNT_SUCCESS:
       return {
         ...state,
         ...initialState,
         [action.duckId]: action.count,
       };
-    case ADD_LIKE :
-    case REMOVE_LIKE :
+    case ADD_LIKE:
+    case REMOVE_LIKE:
       return typeof state[action.duckId] === 'undefined'
         ? state
         : {
-          ...state,
-          [action.duckId]: count(state[action.duckId], action),
-        };
-    default :
+            ...state,
+            [action.duckId]: count(state[action.duckId], action),
+          };
+    default:
       return state;
   }
 }

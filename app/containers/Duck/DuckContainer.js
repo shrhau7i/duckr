@@ -7,28 +7,29 @@ import * as usersLikesAction from 'redux/modules/usersLikes';
 const { func, object, bool, number } = PropTypes;
 
 class DuckContainer extends React.Component {
-  constructor () {
+  constructor() {
     super();
     this.handleClick = this.handleClick.bind(this);
     this.goToProfile = this.goToProfile.bind(this);
   }
 
-  goToProfile (e) {
+  goToProfile(e) {
     e.stopPropagation();
     this.context.router.push('/' + this.props.duck.get('uid'));
   }
 
-  handleClick (e) {
+  handleClick(e) {
     e.preventDefault();
     this.context.router.push('/duckDetail/' + this.props.duck.get('duckId'));
   }
 
-  render () {
+  render() {
     return (
       <Duck
         goToProfile={this.goToProfile}
         onClick={this.props.hideReplyBtn === true ? null : this.handleClick}
-        {...this.props} />
+        {...this.props}
+      />
     );
   }
 }
@@ -91,7 +92,7 @@ DuckContainer.defaultProps = {
 //   },
 // })
 
-function mapStateToProps ({ducks, likeCount, usersLikes}, props) {
+function mapStateToProps({ ducks, likeCount, usersLikes }, props) {
   return {
     duck: ducks.get(props.duckId),
     hideLikeCount: props.hideLikeCount,
@@ -103,5 +104,5 @@ function mapStateToProps ({ducks, likeCount, usersLikes}, props) {
 
 export default connect(
   mapStateToProps,
-  (dispatch) => bindActionCreators(usersLikesAction, dispatch)
+  dispatch => bindActionCreators(usersLikesAction, dispatch)
 )(DuckContainer);

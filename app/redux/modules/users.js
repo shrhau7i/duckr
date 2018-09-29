@@ -9,26 +9,26 @@ const FETCHING_USER_FAILURE = 'FETCHING_USER_FAILURE';
 const FETCHING_USER_SUCCESS = 'FETCHING_USER_SUCCESS';
 const REMOVE_FETCHING_USER = 'REMOVE_FETCHING_USER';
 
-export function authUser (uid) {
+export function authUser(uid) {
   return {
     type: AUTH_USER,
     uid,
   };
 }
 
-function unauthUser () {
+function unauthUser() {
   return {
     type: UNAUTH_USER,
   };
 }
 
-function fetchingUser () {
+function fetchingUser() {
   return {
     type: FETCHING_USER,
   };
 }
 
-function fetchingUserFailure (error) {
+function fetchingUserFailure(error) {
   console.warn(error);
   return {
     type: FETCHING_USER_FAILURE,
@@ -36,7 +36,7 @@ function fetchingUserFailure (error) {
   };
 }
 
-export function fetchingUserSuccess (uid, user, timestamp) {
+export function fetchingUserSuccess(uid, user, timestamp) {
   return {
     type: FETCHING_USER_SUCCESS,
     uid,
@@ -45,37 +45,42 @@ export function fetchingUserSuccess (uid, user, timestamp) {
   };
 }
 
-export function fetchAndHandleUser (uid) {
-  return function (dispatch) {
+export function fetchAndHandleUser(uid) {
+  return function(dispatch) {
     dispatch(fetchingUser());
     return fetchUser(uid)
-      .then((user) => dispatch(fetchingUserSuccess(uid, user, Date.now())))
-      .catch((error) => dispatch(fetchingUserFailure(error)));
+      .then(user => dispatch(fetchingUserSuccess(uid, user, Date.now())))
+      .catch(error => dispatch(fetchingUserFailure(error)));
   };
 }
 
-export function fetchAndHandleAuthedUser () {
-  return function (dispatch) {
+export function fetchAndHandleAuthedUser() {
+  return function(dispatch) {
     dispatch(fetchingUser());
-    return auth().then(({user, credential}) => {
-      const userData = user.providerData[0];
-      const userInfo = formatUserInfo(userData.displayName, userData.photoURL, user.uid);
-      return dispatch(fetchingUserSuccess(user.uid, userInfo, Date.now()));
-    })
-    .then(({user}) => saveUser(user))
-    .then((user) => dispatch(authUser(user.uid)))
-    .catch((error) => dispatch(fetchingUserFailure(error)));
+    return auth()
+      .then(({ user, credential }) => {
+        const userData = user.providerData[0];
+        const userInfo = formatUserInfo(
+          userData.displayName,
+          userData.photoURL,
+          user.uid
+        );
+        return dispatch(fetchingUserSuccess(user.uid, userInfo, Date.now()));
+      })
+      .then(({ user }) => saveUser(user))
+      .then(user => dispatch(authUser(user.uid)))
+      .catch(error => dispatch(fetchingUserFailure(error)));
   };
 }
 
-export function logoutAndUnauth () {
-  return function (dispatch) {
+export function logoutAndUnauth() {
+  return function(dispatch) {
     logout();
     dispatch(unauthUser());
   };
 }
 
-export function removeFetchingUser () {
+export function removeFetchingUser() {
   return {
     type: REMOVE_FETCHING_USER,
   };
@@ -90,15 +95,15 @@ const initialUserState = {
   },
 };
 
-function user (state = initialUserState, action) {
+function user(state = initialUserState, action) {
   switch (action.type) {
-    case FETCHING_USER_SUCCESS :
+    case FETCHING_USER_SUCCESS:
       return {
         ...state,
         info: action.user,
         lastUpdated: action.timestamp,
       };
-    default :
+    default:
       return state;
   }
 }
@@ -110,15 +115,15 @@ const initialState = {
   authedId: '',
 };
 
-export default function users (state = initialState, action) {
+export default function users(state = initialState, action) {
   switch (action.type) {
-    case AUTH_USER :
+    case AUTH_USER:
       return {
         ...state,
         isAuthed: true,
         authedId: action.uid,
       };
-    case UNAUTH_USER :
+    case UNAUTH_USER:
       return {
         ...state,
         isAuthed: false,
@@ -135,7 +140,7 @@ export default function users (state = initialState, action) {
         isFetching: false,
         error: action.error,
       };
-    case REMOVE_FETCHING_USER :
+    case REMOVE_FETCHING_USER:
       return {
         ...state,
         isFetching: false,
@@ -143,17 +148,17 @@ export default function users (state = initialState, action) {
     case FETCHING_USER_SUCCESS:
       return action.user === null
         ? {
-          ...state,
-          isFetching: false,
-          error: '',
-        }
+            ...state,
+            isFetching: false,
+            error: '',
+          }
         : {
-          ...state,
-          isFetching: false,
-          error: '',
-          [action.uid]: user(state[action.uid], action),
-        };
-    default :
+            ...state,
+            isFetching: false,
+            error: '',
+            [action.uid]: user(state[action.uid], action),
+          };
+    default:
       return state;
   }
 }

@@ -8,23 +8,25 @@ import * as userActionCreators from 'redux/modules/users';
 const { func, bool, string, object } = PropTypes;
 
 class AuthenticateContainer extends React.Component {
-  constructor () {
+  constructor() {
     super();
     this.handleAuth = this.handleAuth.bind(this);
   }
 
-  handleAuth (e) {
+  handleAuth(e) {
     e.preventDefault();
-    this.props.fetchAndHandleAuthedUser()
+    this.props
+      .fetchAndHandleAuthedUser()
       .then(() => this.context.router.replace('feed'));
   }
 
-  render () {
+  render() {
     return (
       <Authenticate
         onAuth={this.handleAuth}
         isFetching={this.props.isFetching}
-        error={this.props.error} />
+        error={this.props.error}
+      />
     );
   }
 }
@@ -64,6 +66,6 @@ AuthenticateContainer.contextTypes = {
 // })
 
 export default connect(
-  (state) => ({isFetching: state.isFetching, error: state.error}),
-  (dispatch) => bindActionCreators(userActionCreators, dispatch)
+  state => ({ isFetching: state.isFetching, error: state.error }),
+  dispatch => bindActionCreators(userActionCreators, dispatch)
 )(AuthenticateContainer);

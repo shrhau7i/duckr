@@ -9,18 +9,22 @@ Navigation.propTypes = ActionLinks.propTypes = NavLinks.propTypes = {
   isAuthed: PropTypes.bool.isRequired,
 };
 
-function NavLinks ({isAuthed}) {
-  return isAuthed === true
-    ? <I18n>
-        {(t) => {
-          return (
-            <ul>
-              <li><Link to='/' className={link}>{t('home.label')}</Link></li>
-            </ul>
-          );
-        }}
-      </I18n>
-    : null;
+function NavLinks({ isAuthed }) {
+  return isAuthed === true ? (
+    <I18n>
+      {t => {
+        return (
+          <ul>
+            <li>
+              <Link to="/" className={link}>
+                {t('home.label')}
+              </Link>
+            </li>
+          </ul>
+        );
+      }}
+    </I18n>
+  ) : null;
 }
 
 // function ActionLinks ({isAuthed}) {
@@ -35,31 +39,47 @@ function NavLinks ({isAuthed}) {
 //       </ul>;
 // }
 
-function ActionLinks ({isAuthed}) {
-  return isAuthed === true
-    ? <I18n>
-        {(t) => {
-          return (
-            <ul>
-              <li><ModalContainer /></li>
-              <li><Link to='/logout' className={link}>{t('logout.label')}</Link></li>
-            </ul>
-          );
-        }}
-      </I18n>
-    : <I18n>
-        {(t) => {
-          return (
-            <ul>
-              <li><Link to='/' className={link}>{t('home.label')}</Link></li>
-              <li><Link to='/auth' className={link}>{t('authenticate.label')}</Link></li>
-            </ul>
-          );
-        }}
-      </I18n>;
+function ActionLinks({ isAuthed }) {
+  return isAuthed === true ? (
+    <I18n>
+      {t => {
+        return (
+          <ul>
+            <li>
+              <ModalContainer />
+            </li>
+            <li>
+              <Link to="/logout" className={link}>
+                {t('logout.label')}
+              </Link>
+            </li>
+          </ul>
+        );
+      }}
+    </I18n>
+  ) : (
+    <I18n>
+      {t => {
+        return (
+          <ul>
+            <li>
+              <Link to="/" className={link}>
+                {t('home.label')}
+              </Link>
+            </li>
+            <li>
+              <Link to="/auth" className={link}>
+                {t('authenticate.label')}
+              </Link>
+            </li>
+          </ul>
+        );
+      }}
+    </I18n>
+  );
 }
 
-export default function Navigation ({isAuthed}) {
+export default function Navigation({ isAuthed }) {
   return (
     <div className={container}>
       <nav className={navContainer}>

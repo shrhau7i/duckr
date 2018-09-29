@@ -3,7 +3,7 @@ import { Home } from 'components';
 import i18next from 'config/i18n';
 
 class HomeContainer extends React.Component {
-  componentDidMount () {
+  componentDidMount() {
     document.querySelector('button').addEventListener('click', () => {
       if (i18next.language !== 'en') {
         i18next.changeLanguage('en');
@@ -13,10 +13,8 @@ class HomeContainer extends React.Component {
     });
   }
 
-  render () {
-    return (
-      <Home />
-    );
+  render() {
+    return <Home />;
   }
 }
 

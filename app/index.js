@@ -10,17 +10,18 @@ import * as reducers from 'redux/modules';
 import { hashHistory } from 'react-router';
 
 const store = createStore(
-  combineReducers({...reducers, routing: routerReducer}),
+  combineReducers({ ...reducers, routing: routerReducer }),
   compose(
-  applyMiddleware(thunk),
-  window.devToolsExtension ? window.devToolsExtension() : (f) => f
-));
+    applyMiddleware(thunk),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  )
+);
 // console.log(store);
 // console.log(store.getState());
 
 const history = syncHistoryWithStore(hashHistory, store);
 
-function checkAuth (nextState, replace) {
+function checkAuth(nextState, replace) {
   if (store.getState().users.isFetching === true) {
     return;
   }
@@ -38,8 +39,6 @@ function checkAuth (nextState, replace) {
 }
 
 ReactDOM.render(
-  <Provider store={store}>
-    {getRoutes(checkAuth, history)}
-  </Provider>,
+  <Provider store={store}>{getRoutes(checkAuth, history)}</Provider>,
   document.getElementById('app')
 );

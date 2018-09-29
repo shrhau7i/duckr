@@ -10,13 +10,13 @@ const ADD_DUCK = 'ADD_DUCK';
 const ADD_MULTIPLE_DUCKS = 'ADD_MULTIPLE_DUCKS';
 const REMOVE_FETCHING = 'REMOVE_FETCHING';
 
-function fetchingDuck () {
+function fetchingDuck() {
   return {
     type: FETCHING_DUCK,
   };
 }
 
-function fetchingDuckError (error) {
+function fetchingDuckError(error) {
   console.warn(error);
   return {
     type: FETCHING_DUCK_ERROR,
@@ -24,54 +24,54 @@ function fetchingDuckError (error) {
   };
 }
 
-function fetchingDuckSuccess (duck) {
+function fetchingDuckSuccess(duck) {
   return {
     type: FETCHING_DUCK_SUCCESS,
     duck,
   };
 }
 
-export function removeFetching () {
+export function removeFetching() {
   return {
     type: REMOVE_FETCHING,
   };
 }
 
-function addDuck (duck) {
+function addDuck(duck) {
   return {
     type: ADD_DUCK,
     duck,
   };
 }
 
-export function addMultipleDucks (ducks) {
+export function addMultipleDucks(ducks) {
   return {
     type: ADD_MULTIPLE_DUCKS,
     ducks,
   };
 }
 
-export function duckFanout (duck) {
-  return function (dispatch, getState) {
+export function duckFanout(duck) {
+  return function(dispatch, getState) {
     const uid = getState().users.authedId;
     saveDuck(duck)
-      .then((duckWithID) => {
+      .then(duckWithID => {
         dispatch(addDuck(duckWithID));
         dispatch(closeModal());
         dispatch(addSingleUsersDuck(uid, duckWithID.duckId));
       })
-      .catch((err) => {
+      .catch(err => {
         console.warn('Error in duckFanout', err);
       });
   };
 }
 
-export function fetchAndHandleDuck (duckId) {
-  return function (dispatch, getState) {
+export function fetchAndHandleDuck(duckId) {
+  return function(dispatch, getState) {
     dispatch(fetchingDuck());
     fetchDuck(duckId)
-      .then((duck) => dispatch(fetchingDuckSuccess(duck)))
-      .catch((error) => dispatch(fetchingDuckError(error)));
+      .then(duck => dispatch(fetchingDuckSuccess(duck)))
+      .catch(error => dispatch(fetchingDuckError(error)));
   };
 }
 
@@ -80,32 +80,32 @@ const initialState = Map({
   error: '',
 });
 
-export default function ducks (state = initialState, action) {
+export default function ducks(state = initialState, action) {
   switch (action.type) {
-    case FETCHING_DUCK :
+    case FETCHING_DUCK:
       return state.merge({
         isFetching: true,
       });
-    case ADD_DUCK :
-    case FETCHING_DUCK_SUCCESS :
+    case ADD_DUCK:
+    case FETCHING_DUCK_SUCCESS:
       return state.merge({
         error: '',
         isFetching: false,
         [action.duck.duckId]: action.duck,
       });
-    case FETCHING_DUCK_ERROR :
+    case FETCHING_DUCK_ERROR:
       return state.merge({
         isFetching: false,
         error: action.error,
       });
-    case REMOVE_FETCHING :
+    case REMOVE_FETCHING:
       return state.merge({
         isFetching: false,
         error: '',
       });
-    case ADD_MULTIPLE_DUCKS :
+    case ADD_MULTIPLE_DUCKS:
       return state.merge(action.ducks);
-    default :
+    default:
       return state;
   }
 }

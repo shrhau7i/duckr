@@ -9,7 +9,7 @@ import * as usersDucksActionCreators from 'redux/modules/usersDucks';
 const { string, bool, number, shape, func } = PropTypes;
 
 class UserContainer extends React.Component {
-  componentDidMount () {
+  componentDidMount() {
     const uid = this.props.routeParams.uid;
     if (this.props.noUser === true || staleUser(this.props.lastUpdated)) {
       this.props.fetchAndHandleUser(uid);
@@ -20,14 +20,15 @@ class UserContainer extends React.Component {
     }
   }
 
-  render () {
+  render() {
     return (
       <User
         noUser={this.props.noUser}
         isFetching={this.props.isFetching}
         name={this.props.name}
         error={this.props.error}
-        duckIds={this.props.duckIds} />
+        duckIds={this.props.duckIds}
+      />
     );
   }
 }
@@ -39,7 +40,7 @@ UserContainer.propTypes = {
   error: string.isRequired,
   lastUpdated: number.isRequired,
   duckIds: string.isRequired,
-  routeParams: shape({uid: string.isRequired}),
+  routeParams: shape({ uid: string.isRequired }),
   fetchAndHandleUsersDucks: func.isRequired,
   fetchAndHandleUser: func.isRequired,
 };
@@ -78,7 +79,7 @@ UserContainer.propTypes = {
 //   },
 // })
 
-function mapStateToProps ({users, usersDucks}, props) {
+function mapStateToProps({ users, usersDucks }, props) {
   const specificUsersDucks = usersDucks[props.routeParams.uid];
   const user = users[props.routeParams.uid];
   const noUser = typeof user === 'undefined';
@@ -93,11 +94,14 @@ function mapStateToProps ({users, usersDucks}, props) {
   };
 }
 
-function mapDispatchToProps (dispatch) {
-  return bindActionCreators({
-    ...usersActionCreators,
-    ...usersDucksActionCreators,
-  }, dispatch);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      ...usersActionCreators,
+      ...usersDucksActionCreators,
+    },
+    dispatch
+  );
 }
 
 export default connect(

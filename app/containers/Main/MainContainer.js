@@ -11,11 +11,15 @@ import { firebaseAuth } from 'config/constants';
 const { bool, func, object, string } = PropTypes;
 
 class MainContainer extends React.Component {
-  componentDidMount () {
-    firebaseAuth().onAuthStateChanged((user) => {
+  componentDidMount() {
+    firebaseAuth().onAuthStateChanged(user => {
       if (user) {
         const userData = user.providerData[0];
-        const userInfo = formatUserInfo(userData.displayName, userData.photoURL, user.uid);
+        const userInfo = formatUserInfo(
+          userData.displayName,
+          userData.photoURL,
+          user.uid
+        );
         this.props.authUser(user.uid);
         this.props.fetchingUserSuccess(user.uid, userInfo, Date.now());
         this.props.setUsersLikes();
@@ -28,15 +32,13 @@ class MainContainer extends React.Component {
     });
   }
 
-  render () {
-    return this.props.isFetching === true
-      ? null
-      : <div className={container}>
-          <Navigation isAuthed={this.props.isAuthed} />
-          <div className={innerContainer}>
-            {this.props.children}
-          </div>
-        </div>;
+  render() {
+    return this.props.isFetching === true ? null : (
+      <div className={container}>
+        <Navigation isAuthed={this.props.isAuthed} />
+        <div className={innerContainer}>{this.props.children}</div>
+      </div>
+    );
   }
 }
 
@@ -57,9 +59,13 @@ MainContainer.contextTypes = {
 };
 
 export default connect(
-  ({users}) => ({isAuthed: users.isAuthed, isFetching: users.isFetching}),
-  (dispatch) => bindActionCreators({
-    ...usersLikesActionCreators,
-    ...userActionCreators,
-  }, dispatch)
+  ({ users }) => ({ isAuthed: users.isAuthed, isFetching: users.isFetching }),
+  dispatch =>
+    bindActionCreators(
+      {
+        ...usersLikesActionCreators,
+        ...userActionCreators,
+      },
+      dispatch
+    )
 )(MainContainer);

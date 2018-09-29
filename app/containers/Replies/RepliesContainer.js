@@ -8,20 +8,20 @@ import * as repliesActionCreators from 'redux/modules/replies';
 const { bool, string, number, object, func } = PropTypes;
 
 class RepliesContainer extends React.Component {
-
-  componentDidMount () {
+  componentDidMount() {
     if (staleReplies(this.props.lastUpdated)) {
       this.props.fetchAndHandleReplies(this.props.duckId);
     }
   }
 
-  render () {
+  render() {
     return (
       <Replies
         isFetching={this.props.isFetching}
         error={this.props.error}
         lastUpdated={this.props.lastUpdated}
-        replies={this.props.replies} />
+        replies={this.props.replies}
+      />
     );
   }
 }
@@ -70,7 +70,7 @@ RepliesContainer.defaultProps = {
 //   },
 // })
 
-function mapStateToProps (state, props) {
+function mapStateToProps(state, props) {
   const duckRepliesInfo = state.replies[props.duckId] || {};
   const { lastUpdated, replies } = duckRepliesInfo;
   return {
@@ -83,5 +83,5 @@ function mapStateToProps (state, props) {
 
 export default connect(
   mapStateToProps,
-  (dispatch) => bindActionCreators(repliesActionCreators, dispatch)
+  dispatch => bindActionCreators(repliesActionCreators, dispatch)
 )(RepliesContainer);

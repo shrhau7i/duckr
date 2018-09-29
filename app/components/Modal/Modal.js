@@ -2,8 +2,13 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { default as ReactModal } from 'react-modal';
 import {
-  newDuckTop, pointer, newDuckInputContainer,
-  newDuckInput, submitDuckBtn, darkBtn } from './styles.css';
+  newDuckTop,
+  pointer,
+  newDuckInputContainer,
+  newDuckInput,
+  submitDuckBtn,
+  darkBtn,
+} from './styles.css';
 import { formatDuck } from 'helpers/utils';
 
 const modalStyles = {
@@ -29,33 +34,41 @@ Modal.propTypes = {
   user: object.isRequired,
 };
 
-export default function Modal (props) {
-  function submitDuck () {
+export default function Modal(props) {
+  function submitDuck() {
     return props.duckFanout(formatDuck(props.duckText, props.user));
   }
 
   return (
     <span className={darkBtn} onClick={props.openModal}>
       {'Duck'}
-      <ReactModal style={modalStyles} isOpen={props.isOpen} onRequestClose={props.closeModal}>
+      <ReactModal
+        style={modalStyles}
+        isOpen={props.isOpen}
+        onRequestClose={props.closeModal}
+      >
         <div className={newDuckTop}>
           <span>{'Compose new Duck'}</span>
-          <span onClick={props.closeModal} className={pointer}>{'X'}</span>
+          <span onClick={props.closeModal} className={pointer}>
+            {'X'}
+          </span>
         </div>
         <div className={newDuckInputContainer}>
           <textarea
-            onChange={(e) => props.updateDuckText(e.target.value)}
+            onChange={e => props.updateDuckText(e.target.value)}
             value={props.duckText}
             maxLength={140}
-            type='text'
+            type="text"
             className={newDuckInput}
-            placeholder="What's on your mind?" />
+            placeholder="What's on your mind?"
+          />
         </div>
         <button
           className={submitDuckBtn}
           disabled={props.isSubmitDisabled}
-          onClick={submitDuck}>
-            {'Duck'}
+          onClick={submitDuck}
+        >
+          {'Duck'}
         </button>
       </ReactModal>
     </span>

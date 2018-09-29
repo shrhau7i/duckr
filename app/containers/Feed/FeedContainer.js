@@ -8,18 +8,19 @@ import { List } from 'immutable';
 const { bool, string, func } = PropTypes;
 
 class FeedContainer extends React.Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.setAndHandleFeedListener();
   }
 
-  render () {
+  render() {
     return (
       <Feed
         duckIds={this.props.duckIds}
         newDucksAvailable={this.props.newDucksAvailable}
         error={this.props.error}
         isFetching={this.props.isFetching}
-        resetNewDucksAvailable={this.props.resetNewDucksAvailable} />
+        resetNewDucksAvailable={this.props.resetNewDucksAvailable}
+      />
     );
   }
 }
@@ -57,7 +58,7 @@ FeedContainer.propTypes = {
 //   },
 // })
 
-function mapStateToProps ({feed}) {
+function mapStateToProps({ feed }) {
   return {
     newDucksAvailable: feed.get('newDucksAvailable'),
     error: feed.get('error'),
@@ -76,5 +77,5 @@ function mapStateToProps ({feed}) {
 
 export default connect(
   mapStateToProps,
-  (dispatch) => bindActionCreators(feedActionCreators, dispatch)
+  dispatch => bindActionCreators(feedActionCreators, dispatch)
 )(FeedContainer);
